@@ -1,0 +1,379 @@
+{
+	"info": {
+		"_postman_id": "0a7a076c-dab0-420a-969e-fb2c6559ac3e",
+		"name": "ChallengeWebservice",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16050786"
+	},
+	"item": [
+		{
+			"name": "servicios/Albums",
+			"item": [
+				{
+					"name": "albums",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var Ajv = require('ajv');\r",
+									"var ajv = new Ajv({logger: console, allErrors: true});\r",
+									"var query = {};\r",
+									"var responseSchema = {\r",
+									"    \"items\": {\r",
+									"        \"required\": [\r",
+									"            \"userId\",\r",
+									"            \"id\",\r",
+									"            \"title\"\r",
+									"        ], \r",
+									"       }}\r",
+									"pm.test(\"Test status OK 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Test el metodo es GET\", function () {\r",
+									"   pm.expect(pm.request.method).to.eql('GET');\r",
+									"});\r",
+									"pm.test('Test la response es valida', function() {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(ajv.validate(responseSchema, jsonData), JSON.stringify(ajv.errors)).to.be.true;\r",
+									"});\r",
+									"    pm.test(\"Test nombre del Status code\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"   \r",
+									"});\r",
+									"pm.test(\"Test exito Content Type\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}albums",
+							"host": [
+								"{{BaseUrl}}albums"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{BaseUrl}}albums/",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var Ajv = require('ajv');\r",
+									"var ajv = new Ajv({logger: console, allErrors: true});\r",
+									"var query = {};\r",
+									"var responseSchema = {\r",
+									"    \"items\": {\r",
+									"        \"required\": [\r",
+									"            \"name\",\r",
+									"            \"id\",\r",
+									"            \"postId\"\r",
+									"        ]\r",
+									"        \r",
+									"}}\r",
+									"pm.test(\"Test status OK 20\", function () {\r",
+									"    pm.response.to.have.status(201,200);\r",
+									"});\r",
+									"pm.test(\"Test el metodo es POST\", function () {\r",
+									"   pm.expect(pm.request.method).to.eql('POST');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test string en body\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"id\",\"101\");\r",
+									"});\r",
+									"\r",
+									"pm.test('Test la response es valida', function() {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(ajv.validate(responseSchema, jsonData), JSON.stringify(ajv.errors)).to.be.true;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"userId\": 10,\r\n        \"id\": 101,\r\n        \"title\": \"test agregando objeto\"\r\n        \r\n }"
+						},
+						"url": {
+							"raw": "{{BaseUrl}}albums/",
+							"host": [
+								"{{BaseUrl}}albums"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "servicios/Users",
+			"item": [
+				{
+					"name": "users/",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var Ajv = require('ajv');\r",
+									"var ajv = new Ajv({logger: console, allErrors: true});\r",
+									"var query = {};\r",
+									"var responseSchema = {\r",
+									"    \"items\": {\r",
+									"        \"required\": [\r",
+									"         \"id\",\r",
+									"        \"name\",\r",
+									"        \"username\",\r",
+									"        \"email\",\r",
+									"        \"address\"\r",
+									"        ], \r",
+									"       }}\r",
+									"pm.test(\"Test status OK 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Test el metodo es GET\", function () {\r",
+									"   pm.expect(pm.request.method).to.eql('GET');\r",
+									"});\r",
+									"\r",
+									"    pm.test(\"Test nombre del Status code\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"   \r",
+									"});\r",
+									"pm.test(\"Test exito Content Type\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test('Test la response es valida', function() {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(ajv.validate(responseSchema, jsonData), JSON.stringify(ajv.errors)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}users/",
+							"host": [
+								"{{BaseUrl}}users"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{BaseUrl}}users/",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var Ajv = require('ajv');\r",
+									"var ajv = new Ajv({logger: console, allErrors: true});\r",
+									"var query = {};\r",
+									"var responseSchema = {\r",
+									"    \"items\": {\r",
+									"        \"required\": [\r",
+									"            \"name\",\r",
+									"            \"id\",\r",
+									"            \"postId\"\r",
+									"        ]\r",
+									"        \r",
+									"}}\r",
+									"pm.test(\"Test status OK 20\", function () {\r",
+									"    pm.response.to.have.status(201,200);\r",
+									"});\r",
+									"pm.test(\"Test el metodo es POST\", function () {\r",
+									"   pm.expect(pm.request.method).to.eql('POST');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test string en body\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"id\",\"11\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test('Test la response es valida', function() {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(ajv.validate(responseSchema, jsonData), JSON.stringify(ajv.errors)).to.be.true;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"id\": 11,\r\n        \"name\": \"Daniel Alberto wolhein\",\r\n        \"username\": \"Dani.albert.wolh\",\r\n        \"email\": \"danielwolhein00@gmail.com\",\r\n        \"address\": {\r\n            \"street\": \"Rivadavia\",\r\n            \"suite\": \"Suite 20\",\r\n            \"city\": \"Lobos\",\r\n            \"zipcode\": \"31428-2261\",\r\n            \"geo\": {\r\n                \"lat\": \"-38.2386\",\r\n                \"lng\": \"57.2232\"\r\n            }\r\n        },\r\n        \"phone\": \"024-648-3804\",\r\n        \"website\": \"ambrose.net\",\r\n        \"company\": {\r\n            \"name\": \"CleverIT\",\r\n            \"catchPhrase\": \"Centralized empowering task-force\",\r\n            \"bs\": \"target end-to-end models\"\r\n        }"
+						},
+						"url": {
+							"raw": "{{BaseUrl}}users/",
+							"host": [
+								"{{BaseUrl}}users"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "servicios/Comments",
+			"item": [
+				{
+					"name": "comments/",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var Ajv = require('ajv');\r",
+									"var ajv = new Ajv({logger: console, allErrors: true});\r",
+									"var query = {};\r",
+									"var responseSchema = {\r",
+									"    \"items\": {\r",
+									"        \"required\": [\r",
+									"         \"id\",\r",
+									"        \"postId\",\r",
+									"        \"name\",\r",
+									"        \"email\",\r",
+									"        \"body\"\r",
+									"        ], \r",
+									"       }}\r",
+									"pm.test(\"Test status OK 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Test el metodo es GET\", function () {\r",
+									"   pm.expect(pm.request.method).to.eql('GET');\r",
+									"});\r",
+									"\r",
+									"    pm.test(\"Test nombre del Status code\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"   \r",
+									"});\r",
+									"pm.test(\"Test exito Content Type\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test('Test la response es valida', function() {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(ajv.validate(responseSchema, jsonData), JSON.stringify(ajv.errors)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}comments/",
+							"host": [
+								"{{BaseUrl}}comments"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{BaseUrl}}comments/",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var Ajv = require('ajv');\r",
+									"var ajv = new Ajv({logger: console, allErrors: true});\r",
+									"var query = {};\r",
+									"var responseSchema = {\r",
+									"    \"items\": {\r",
+									"        \"required\": [\r",
+									"            \"name\",\r",
+									"            \"id\",\r",
+									"            \"postId\"\r",
+									"        ]\r",
+									"        \r",
+									"}}\r",
+									"pm.test(\"Test status OK 20\", function () {\r",
+									"    pm.response.to.have.status(201,200);\r",
+									"});\r",
+									"pm.test(\"Test el metodo es POST\", function () {\r",
+									"   pm.expect(pm.request.method).to.eql('POST');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test string en body\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"id\",\"501\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test('Test la response es valida', function() {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(ajv.validate(responseSchema, jsonData), JSON.stringify(ajv.errors)).to.be.true;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"postId\": 100,\r\n        \"id\": 501,\r\n        \"name\": \"ex eaque eum natus\",\r\n        \"email\": \"Emma@joanny.ca\",\r\n        \"body\": \"perspiciatis quis doloremque\\nveniam nisi eos velit sed\\nid totam inventore voluptatem laborum et eveniet\\naut aut aut maxime quia temporibus ut omnis\"\r\n    }"
+						},
+						"url": {
+							"raw": "{{BaseUrl}}comments/",
+							"host": [
+								"{{BaseUrl}}comments"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
